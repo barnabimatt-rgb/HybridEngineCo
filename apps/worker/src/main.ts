@@ -1,18 +1,11 @@
 import { runPipeline } from "@hec/core";
-import { TopicAgent } from "@hec/agents";
+import { contentPipeline } from "@hec/core/src/pipeline/pipelines/contentPipeline";
 import { createLogger } from "@hec/tools";
 
 async function main() {
-  const logger = createLogger("worker:demo");
+  const logger = createLogger("worker:content");
 
-  const steps = [
-    {
-      name: "topic-agent",
-      run: async (input: any) => TopicAgent.run(input)
-    }
-  ];
-
-  const result = await runPipeline(steps, {}, {
+  const result = await runPipeline(contentPipeline, {}, {
     runId: Date.now().toString(),
     logger
   });
