@@ -1,15 +1,11 @@
 {
   "name": "worker",
-  "version": "0.1.0",
-  "main": "dist/main.js",
+  "version": "1.0.0",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node src/main.ts",
     "build": "tsc -p tsconfig.json",
-    "lint": "echo \"no lint yet\""
+    "dev": "node dist/index.js"
   },
-  "dependencies": {
-    "@hec/core": "0.1.0",
-    "@hec/agents": "0.1.0",
-    "@hec/tools": "0.1.0"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
