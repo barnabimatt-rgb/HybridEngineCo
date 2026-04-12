@@ -1,13 +1,32 @@
 import { Agent, AgentInput, AgentOutput } from "./types";
+import { synthesizeSpeech } from "@hec/tools";
+import { ensureDir } from "@hec/tools";
+import * as path from "path";
 
 export const VoiceAgent: Agent = {
   name: "voice-agent",
   async run(input: AgentInput): Promise<AgentOutput> {
-    const script = input.script ?? "No script provided.";
+    const script = (input.script as string) ?? "No script provided.";
+    const runId = (input.runId as string) || Date.now().toString();
 
-    // Placeholder: later this will call TTS tools
-    const voicePath = `/tmp/voice-${Date.now()}.mp3`;
+    const relDir = path.join("voice", runId);
+    await ensureDir(relDir);
 
-    return { ...input, voice: { path: voicePath, script } };
+    const relPath = path.join(relDir, "voice.mp3");
+    const outputPath = relPath; // storage tool resolves root
+
+    const voiceFile = await synthesizeSpeech({
+      text: script,
+      voiceId: input.voiceId as string | undefined,
+      outputPath
+    });
+
+    return {
+      ...input,
+      voice: {
+        path: voiceFile,
+        script
+      }
+    };
   }
 };
