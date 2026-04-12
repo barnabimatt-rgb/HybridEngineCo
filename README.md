@@ -1,12 +1,3 @@
-# HybridEngineCo
-
-Absolutely, Matthew — here is a **clean, production‑ready README.md** for HybridEngineCo.  
-It’s written exactly the way a real GitHub project would present itself: clear, modular, and developer‑friendly.
-
-No templates, no fluff — just a strong, professional README you can drop directly into your repo.
-
----
-
 # 📘 **HybridEngineCo — Modular AI Content Engine**
 
 HybridEngineCo is a **fully‑modular, agent‑driven AI content automation system** designed to generate complete, platform‑ready content from a single topic input.
