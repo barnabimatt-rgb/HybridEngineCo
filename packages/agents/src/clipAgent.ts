@@ -2,6 +2,7 @@ import { Agent, AgentInput, AgentOutput } from "./types";
 import { detectClipsFromScript } from "@hec/tools/src/video/clipDetection";
 import { sliceClip } from "@hec/tools/src/video/clipSlicer";
 import { clipConfig } from "@hec/config";
+import { retry } from "@hec/tools";
 import * as path from "path";
 
 export const ClipAgent: Agent = {
@@ -24,11 +25,9 @@ export const ClipAgent: Agent = {
     for (const clip of detected) {
       const relOut = path.join("video", runId, "clips", `${clip.id}.mp4`);
 
-      const sliced = await sliceClip(
-        fullVideoPath,
-        clip.start,
-        clip.end,
-        relOut
+      const sliced = await retry(
+        () => sliceClip(fullVideoPath, clip.start, clip.end, relOut),
+        { attempts: 3, delayMs: 300, backoffFactor: 2 }
       );
 
       clips.push({
