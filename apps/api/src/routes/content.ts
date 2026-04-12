@@ -7,11 +7,13 @@ const router = Router();
 
 router.post("/content", async (req, res) => {
   const logger = createLogger("api:content-pipeline");
+  const runId = Date.now().toString();
 
-  const result = await runPipeline(contentPipeline, req.body || {}, {
-    runId: Date.now().toString(),
-    logger
-  });
+  const result = await runPipeline(
+    contentPipeline,
+    { ...req.body, runId },
+    { runId, logger }
+  );
 
   res.json(result);
 });
