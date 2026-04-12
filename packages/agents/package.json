@@ -1,16 +1,9 @@
 {
   "name": "@hec/agents",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "dev": "ts-node src/index.ts",
-    "lint": "echo \"no lint yet\""
-  },
-  "dependencies": {
-    "@hec/core": "0.1.0",
-    "@hec/tools": "0.1.0",
-    "@hec/config": "0.1.0"
+    "build": "tsc -p tsconfig.json"
   }
 }
