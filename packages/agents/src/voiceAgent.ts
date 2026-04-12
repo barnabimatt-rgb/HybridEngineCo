@@ -1,6 +1,5 @@
 import { Agent, AgentInput, AgentOutput } from "./types";
-import { synthesizeSpeech } from "@hec/tools";
-import { ensureDir } from "@hec/tools";
+import { synthesizeSpeech, ensureDir } from "@hec/tools";
 import * as path from "path";
 
 export const VoiceAgent: Agent = {
@@ -13,12 +12,11 @@ export const VoiceAgent: Agent = {
     await ensureDir(relDir);
 
     const relPath = path.join(relDir, "voice.mp3");
-    const outputPath = relPath; // storage tool resolves root
 
     const voiceFile = await synthesizeSpeech({
       text: script,
-      voiceId: input.voiceId as string | undefined,
-      outputPath
+      voiceId: (input.voiceId as string | undefined) ?? undefined,
+      outputPath: relPath
     });
 
     return {
