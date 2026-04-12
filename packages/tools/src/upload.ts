@@ -1,4 +1,5 @@
 import { createLogger } from "./logging";
+import { uploadVideoToYouTube } from "./upload/youtubeClient";
 
 const log = createLogger("tools:upload");
 
@@ -11,13 +12,20 @@ export interface UploadResult {
 export async function uploadToYouTube(
   videoPath: string,
   title: string,
-  description: string
+  description: string,
+  tags?: string[]
 ): Promise<UploadResult> {
-  // Placeholder: later call YouTube Data API
-  log("uploadToYouTube:placeholder", { videoPath, title });
+  const res = await uploadVideoToYouTube({
+    videoRelPath: videoPath,
+    title,
+    description,
+    tags
+  });
+
   return {
     platform: "youtube",
-    url: `https://youtube.com/watch?v=placeholder-${Date.now()}`
+    url: res.url,
+    id: res.id
   };
 }
 
@@ -25,8 +33,7 @@ export async function uploadToTikTok(
   videoPath: string,
   caption: string
 ): Promise<UploadResult> {
-  // Placeholder: later call TikTok API / automation
-  log("uploadToTikTok:placeholder", { videoPath });
+  log("uploadToTikTok:placeholder", { videoPath, caption });
   return {
     platform: "tiktok",
     url: `https://www.tiktok.com/@placeholder/video/${Date.now()}`
