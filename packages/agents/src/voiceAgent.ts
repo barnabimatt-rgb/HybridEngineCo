@@ -1,5 +1,5 @@
 import { Agent, AgentInput, AgentOutput } from "./types";
-import { synthesizeSpeech, ensureDir } from "@hec/tools";
+import { synthesizeSpeechWithRetry, ensureDir } from "@hec/tools";
 import * as path from "path";
 
 export const VoiceAgent: Agent = {
@@ -13,7 +13,7 @@ export const VoiceAgent: Agent = {
 
     const relPath = path.join(relDir, "voice.mp3");
 
-    const voiceFile = await synthesizeSpeech({
+    const voiceFile = await synthesizeSpeechWithRetry({
       text: script,
       voiceId: (input.voiceId as string | undefined) ?? undefined,
       outputPath: relPath
