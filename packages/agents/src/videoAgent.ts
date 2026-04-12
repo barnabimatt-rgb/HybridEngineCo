@@ -1,7 +1,8 @@
 import { Agent, AgentInput, AgentOutput } from "./types";
-import { ensureDir, runFfmpeg } from "@hec/tools";
+import { ensureDir } from "@hec/tools";
 import { buildFfmpegArgs } from "@hec/tools/src/video/ffmpegBuilder";
 import { generateSrtFromScript } from "@hec/tools/src/video/subtitles";
+import { runFfmpegWithRetry } from "@hec/tools/src/video/ffmpegRetry";
 import * as path from "path";
 
 const BRAND_COLOR = "#8B5CF6";
@@ -34,7 +35,7 @@ export const VideoAgent: Agent = {
         BRAND_COLOR
       );
 
-      await runFfmpeg({ args });
+      await runFfmpegWithRetry(args);
       outputs[fmt] = relOut;
     }
 
