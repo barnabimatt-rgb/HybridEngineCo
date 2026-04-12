@@ -1,6 +1,8 @@
 {
   "name": "hybrid-engine-co",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*",
     "apps/*"
@@ -9,6 +11,7 @@
     "build": "npm run build --workspaces",
     "dev": "npm run dev --workspaces"
   },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "^5.4.0"
   }
