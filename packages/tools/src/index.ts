@@ -5,3 +5,4 @@ export * from "./video";
 export * from "./audio";
 export * from "./storage";
 export * from "./scheduler";
+export * from "./upload";
