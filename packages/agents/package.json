@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hec/core": "0.1.0",
-    "@hec/tools": "0.1.0"
+    "@hec/tools": "0.1.0",
+    "@hec/config": "0.1.0"
   }
 }
