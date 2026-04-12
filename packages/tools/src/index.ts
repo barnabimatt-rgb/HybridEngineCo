@@ -6,3 +6,4 @@ export * from "./audio";
 export * from "./storage";
 export * from "./scheduler";
 export * from "./upload";
+export * from "./thumbnail";
