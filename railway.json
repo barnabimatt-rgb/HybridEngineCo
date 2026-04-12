@@ -1,0 +1,11 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "npm install && npm run build --workspace=apps/worker"
+  },
+  "deploy": {
+    "startCommand": "npm run dev --workspace=apps/worker",
+    "restartPolicyType": "ON_FAILURE",
+    "numReplicas": 1
+  }
+}
