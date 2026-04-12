@@ -1,0 +1,1 @@
+worker: pnpm dev:worker
