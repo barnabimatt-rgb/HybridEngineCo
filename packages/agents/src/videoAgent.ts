@@ -1,49 +1,46 @@
 import { Agent, AgentInput, AgentOutput } from "./types";
-import { runFfmpeg, ensureDir } from "@hec/tools";
+import { ensureDir, runFfmpeg } from "@hec/tools";
+import { buildFfmpegArgs } from "@hec/tools/src/video/ffmpegBuilder";
+import { generateSrtFromScript } from "@hec/tools/src/video/subtitles";
 import * as path from "path";
+
+const BRAND_COLOR = "#8B5CF6";
 
 export const VideoAgent: Agent = {
   name: "video-agent",
   async run(input: AgentInput): Promise<AgentOutput> {
-    const runId = (input.runId as string) || Date.now().toString();
+    const runId = input.runId as string;
+    const script = input.script as string;
+    const voice = input.voice as { path: string };
+
     const relDir = path.join("video", runId);
     await ensureDir(relDir);
 
-    const relOutput = path.join(relDir, "main.mp4");
-    const voice = input.voice as { path?: string } | undefined;
+    const subtitles = await generateSrtFromScript(script, runId);
 
-    const args: string[] = [];
+    const formats = ["9x16", "16x9", "1x1", "4x5"];
+    const outputs: Record<string, string> = {};
 
-    if (voice?.path) {
-      // Very simple placeholder: black video + audio track
-      args.push(
-        "-y",
-        "-f", "lavfi",
-        "-i", "color=c=black:s=1280x720:d=60",
-        "-i", path.join(process.env.ASSET_PATH || "/data/assets", voice.path),
-        "-shortest",
-        "-c:v", "libx264",
-        "-c:a", "aac",
-        path.join(process.env.ASSET_PATH || "/data/assets", relOutput)
+    for (const fmt of formats) {
+      const relOut = path.join(relDir, `main_${fmt}.mp4`);
+      const fullOut = path.join(process.env.ASSET_PATH!, relOut);
+
+      const args = buildFfmpegArgs(
+        path.join(process.env.ASSET_PATH!, voice.path),
+        null,
+        path.join(process.env.ASSET_PATH!, subtitles),
+        fullOut,
+        fmt,
+        BRAND_COLOR
       );
-    } else {
-      // No audio: just a black 10s video
-      args.push(
-        "-y",
-        "-f", "lavfi",
-        "-i", "color=c=black:s=1280x720:d=10",
-        "-c:v", "libx264",
-        path.join(process.env.ASSET_PATH || "/data/assets", relOutput)
-      );
+
+      await runFfmpeg({ args });
+      outputs[fmt] = relOut;
     }
-
-    await runFfmpeg({ args });
 
     return {
       ...input,
-      video: {
-        path: relOutput
-      }
+      video: outputs
     };
   }
 };
