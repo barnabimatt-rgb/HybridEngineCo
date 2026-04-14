@@ -1,134 +1,75 @@
-# 📘 **HybridEngineCo — Modular AI Content Engine**
-
-HybridEngineCo is a **fully‑modular, agent‑driven AI content automation system** designed to generate complete, platform‑ready content from a single topic input.
-
-It produces:
-
-- Scripts  
-- Metadata  
-- Voiceovers  
-- Multi‑format videos  
-- Short‑form clips  
-- Thumbnails  
-- Uploads (YouTube + TikTok placeholder)  
-
-All powered by a clean, resilient pipeline with retries, fallbacks, and cloud‑ready storage.
+# NEXUS AUTOMATION ENGINE
+### Build. Automate. Scale. Silently.
 
 ---
 
-# 🚀 **Features**
+A fully autonomous, faceless AI business system that generates revenue through content, digital products, micro-SaaS tools, and affiliate monetization.
 
-### 🎤 **AI Voice Generation**
-- ElevenLabs → OpenAI fallback  
-- Retry‑aware  
-- Writes audio to persistent storage  
+## What It Does
 
-### 🎬 **Video Assembly Engine**
-- FFmpeg‑powered  
-- Multi‑format export: **9:16, 16:9, 1:1, 4:5**  
-- Subtitles, overlays, transitions  
-- Brand‑colored accents (#8B5CF6)
+- **Daily Trend Scans** — Monitors RSS feeds and extracts trending topics across 5 niches
+- **Content Generation** — Produces 3–6 content pieces/day (scripts, articles, threads)
+- **Video Templates** — Converts scripts to faceless video production specs
+- **Digital Products** — Generates 1–2 products/week (Notion templates, guides, toolkits)
+- **Micro-SaaS Tools** — Specs and deploys a new mini-tool weekly
+- **SEO Engine** — Daily keyword research and article generation
+- **Monetization** — Affiliate strategies, email sequences, funnel templates
+- **Self-Healing** — Auto-detects and recovers from failures
 
-### ✂️ **Clip Extraction**
-- Auto‑detects high‑value moments  
-- Slices clips from 16:9 master  
-- Exported as standalone MP4s  
+## The 5-Pillar Niche Stack
 
-### 🖼️ **Thumbnail Generation**
-- FFmpeg‑generated  
-- Branded accent bar  
-- 16:9 + 9:16 formats  
+1. AI Productivity
+2. Digital Minimalism
+3. Automation Lifestyle
+4. Solopreneur Efficiency
+5. Tech-Optimized Living
 
-### ☁️ **Uploads**
-- YouTube (real, resumable upload)  
-- TikTok (placeholder or Playwright/API later)  
+## Quick Start
 
-### 🔁 **Error‑Resilient Automation**
-- Unified error class  
-- Retry wrappers for:
-  - FFmpeg  
-  - TTS  
-  - Uploads  
-- Pipeline‑safe error propagation  
+```bash
+# Install dependencies
+npm install
 
-### 🧩 **Agent‑Driven Architecture**
-Each stage is a standalone agent:
+# Set environment variables (see env.schema.json)
+cp .env.example .env
+# Edit .env with your keys
 
+# Initialize database
+node db/init.js
+
+# Start the engine
+npm start
 ```
-topic → script → metadata → brand → voice → video → clips → thumbnails → upload
+
+## System Status
+
+```bash
+curl http://localhost:3000/health
+curl http://localhost:3000/status
 ```
+
+## Deployment
+
+Deploy to Railway in one click:
+
+1. Push to GitHub
+2. Connect repo in Railway
+3. Add PostgreSQL plugin
+4. Set env vars from `env.schema.json`
+5. Deploy — system initializes autonomously
+
+## Documentation
+
+- [Full System Docs](./docs/SYSTEM_DOCS.md)
+- [Agent Protocol](./docs/AGENT_PROTOCOL.md)
+- [Environment Schema](./env.schema.json)
+
+## Brand
+
+**Nexus Automation Engine** — Minimalist · Anonymous · Autonomous  
+Colors: `#0D0D0D` / `#00F0FF` / `#E8E8E8`  
+Font: Space Grotesk + Inter
 
 ---
 
-# 📂 **Project Structure**
-
-```
-HybridEngineCo/
-│
-├── packages/
-│   ├── agents/        # All agents (voice, video, clip, thumbnail, upload)
-│   ├── tools/         # FFmpeg, TTS, storage, retry, upload clients
-│   ├── config/        # Brand profiles, templates, thumbnail config, YouTube config
-│   └── core/          # Pipeline graph + pipeline runner
-│
-├── apps/
-│   ├── api/           # Express API for triggering pipeline
-│   └── worker/        # Optional async job processor
-│
-└── infra/
-    └── railway/       # Railway environment + .env.example
-```
-
----
-
-# 🧠 **Pipeline Overview**
-
-The pipeline is defined in:
-
-```
-packages/core/src/pipelineGraph.ts
-```
-
-Execution order:
-
-1. **TopicAgent**  
-2. **ScriptAgent**  
-3. **MetadataAgent**  
-4. **BrandAgent**  
-5. **VoiceAgent**  
-6. **VideoAgent**  
-7. **ClipAgent**  
-8. **ThumbnailAgent**  
-9. **UploadAgent**
-
-The runner executes each agent in sequence and passes state forward.
-
----
-
-# 🔧 **Environment Variables**
-
-Copy `.env.example` into `.env` and fill in:
-
-### **Core**
-```
-ASSET_PATH=/data/assets
-```
-
-### **OpenAI**
-```
-OPENAI_API_KEY=
-```
-
-### **ElevenLabs**
-```
-ELEVENLABS_API_KEY=
-TTS_VOICE_ID=
-```
-
-### **YouTube**
-```
-YT_CLIENT_ID=
-YT_CLIENT_SECRET=
-YT_REFRESH_TOKEN=
-YT_CHANNEL_ID=
-```
+*This system operates autonomously. Minimal human input required.*
