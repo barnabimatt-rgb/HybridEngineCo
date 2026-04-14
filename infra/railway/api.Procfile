@@ -1,1 +1,0 @@
-web: pnpm dev:api
