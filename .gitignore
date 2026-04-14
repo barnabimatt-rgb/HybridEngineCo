@@ -1,0 +1,12 @@
+.env
+node_modules/
+logs/*.jsonl
+memory/data/store.json
+memory/data/*.json
+saas/*/node_modules/
+*.log
+.DS_Store
+dist/
+build/
+coverage/
+.nyc_output/

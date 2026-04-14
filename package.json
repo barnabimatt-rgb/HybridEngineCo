@@ -1,19 +1,48 @@
 {
-  "name": "hybrid-engine-co",
+  "name": "nexus-automation-engine",
   "version": "1.0.0",
-  "private": true,
+  "description": "Nexus Automation Engine — Fully autonomous, faceless AI business system",
   "type": "module",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "main": "server.js",
   "scripts": {
-    "build": "npm run build --workspaces",
-    "dev": "npm run dev --workspaces"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "init-db": "node db/init.js",
+    "trend": "node agents/trend-agent.js --standalone",
+    "heal": "node agents/self-healing-agent.js --standalone",
+    "lint": "eslint .",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0",
+    "uuid": "^10.0.0",
+    "slugify": "^1.6.6",
+    "marked": "^13.0.2",
+    "rss-parser": "^3.13.0",
+    "cheerio": "^1.0.0",
+    "openai": "^4.52.7",
+    "fs-extra": "^11.2.0",
+    "date-fns": "^3.6.0"
+  },
   "devDependencies": {
-    "typescript": "^5.4.0",
-    "@types/node": "^20.0.0"
-  }
+    "eslint": "^9.6.0",
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "nexus",
+    "automation",
+    "ai",
+    "solopreneur",
+    "saas",
+    "content",
+    "seo"
+  ],
+  "license": "MIT"
 }
