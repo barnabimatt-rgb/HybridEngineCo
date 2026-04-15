@@ -22,7 +22,7 @@ ENV TZ=UTC
 FROM base AS deps
 
 COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
+RUN npm install --omit=dev --ignore-scripts && npm cache clean --force
 
 # ── Production stage ──────────────────────────────────────────────────────────
 FROM base AS production
